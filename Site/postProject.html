@@ -90,7 +90,8 @@
         <!-- Page content starts here -->
         <div class="container">
 		<div class="row">
-<form>
+<form action="MAILTO:someone@example.com" method="post" enctype="text/plain">
+
 First name:<br>
 <input type="text" name="firstname"><br>
 Last name: <br>
@@ -98,13 +99,15 @@ Last name: <br>
 Email: <br>
 <input type="text" name="mail">
 <br>
+Description:<br>
+<textarea name="description" rows="10" cols="40"></textarea>
+<br>
 <input type="radio" name="money" value="paid">Paid
 <input type="radio" name="money" value="unpaid">Unpaid
 <br>
 <input type="submit" value="Submit">
 <input type="reset" value="Reset"><br>
-
-</form>
+			</form>
 			
             </div>
         </div>
