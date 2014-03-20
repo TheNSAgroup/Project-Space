@@ -33,9 +33,7 @@
   <body>
 
     <!--Login Modal -->
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-
-
-hidden="true">
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -86,9 +84,7 @@ hidden="true">
                     <!-- Main header menu starts here -->
                 <div class="row" id="header-top">
                     <div class="col-xs-2"> 
-                        <a href="#" data-toggle="offcanvas" data-target="#hidden-menu" data-canvas="body"><img 
-
-src="images/sidemenuicon.svg" alt="Menu"/></a>
+                        <a href="#" data-toggle="offcanvas" data-target="#hidden-menu" data-canvas="body"><img src="images/sidemenuicon.svg" alt="Menu"/></a>
                     </div>
                     <div class="col-xs-8"> 
                         <div id="logo"></div>
@@ -98,9 +94,7 @@ src="images/sidemenuicon.svg" alt="Menu"/></a>
                     <div id="login-text" class="show col-xs-2"> 
 						<div class="row  pull-right account-text">
 							<div class="col-sm-6 col-md-5 col-lg-4">
-								<a href="#" data-toggle="modal" 
-
-data-target="#login-modal">Login</a>
+								<a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
 							</div>
 							<div class="col-sm-6 col-md-5 col-lg-4">
 								<a href="signup.html">Signup</a>
@@ -111,9 +105,7 @@ data-target="#login-modal">Login</a>
 					<!-- User account drop down. Only visible when logged in -->
 					<div id="account-button" class="hidden col-xs-4 col-sm-2">
 						<div class="dropdown pull-right">
-					    	<button class="btn btn-default dropdown-toggle" data-
-
-toggle="dropdown">First name<span class="caret"></span></button>
+					    	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">First name<span class="caret"></span></button>
 					  		<span class="dropdown-arrow"></span>
 					  		<ul class="dropdown-menu">
 								<li><a href="#">Account</a></li>
@@ -139,18 +131,18 @@ toggle="dropdown">First name<span class="caret"></span></button>
 
                 <div class="pic">
 
-                    <a href="#"><img src="images/users/generic.jpg" width="150" height="150" /></a>
+                    <a href="#"><img src="images/users/generic.jpg" width="150" height="150" align = "left"/></a>
+                    <h2>First Last</h2>
+                    <h6>Occupation</h6>
+                    <h6>Residence</h6>
+                    
 
                 </div>
 
                  
 
                 <div class="data">
-
-                    <h1>First Last</h1>
-	                  <h3>Occupation</h3>
-                    <h3>Residence</h3>
-
+                  
               
 
                     <div class="sep"></div>
@@ -158,34 +150,35 @@ toggle="dropdown">First name<span class="caret"></span></button>
                     <ul class="numbers clearfix">
 
                        
-                       <button class="btn btn-danger">Contact</button>
-                 
+<button class="btn btn-danger">Contact</button>
+                 <!--Want this aligned -->
 
                     </ul>
 
                 </div>
 
             </div>
-
+            <h4>About</h4>
+                <p>Stuff...</p><br>
              
 
-            <h1>Experience</h1>
-
-           	<h2>Title</h2>
-	          <h3>Company</h3>
-	          <h3>Duration</h3>
-	          <p>Description</p>
-
-
-            <h1>Skills</h1>
+            <h4>Experience</h4>
+               <p>Title</p>
+	           <p>Company</p>
+	           <p>Duration</p>
+	           <p>Description</p><br>
 
 
-           <h1>Education</h1>
-	         <h2>School</h2>
-           <h3>Degree</h3>
-	         <h3>Year</h3>
+            <h4>Skills</h4><br>
+	          
 
-           <h1>Performance Rating</h1>
+           <h4>Education</h4>
+	           <p>School</p>
+               <p>Degree</p>
+	           <p>Year</p><br>
+
+           <h4>Performance Rating</h4>
+            <!--code for ratings goes here -->
 
         </section>
 
@@ -215,3 +208,4 @@ toggle="dropdown">First name<span class="caret"></span></button>
 <!-- Analytics Code -->
 <noscript><a title="create a website for free" href="http://t15.org">Create a Website for Free</a></noscript>
 <!-- Analytics Code END -->
+  
