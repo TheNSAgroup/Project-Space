@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="icon" type="image/ico" href="images/favicon.ico">
-    
+
     <!-- Loading Bootstrap, Flat UI and custom site template -->
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
@@ -110,7 +110,7 @@
                 <!-- Banner section starts here -->
                 <div class="row">
                     <div class="col-xs-12" id="banner" style="background-image: url(images/banner1.jpg);">
-                        <h1 class="uppercase" id="banner-text">Page name goes here</h1> <!-- CHANGE THIS -->
+                        <h1 class="uppercase" id="banner-text">Post a Project</h1> <!-- CHANGE THIS -->
                     </div>
                 </div>
 				<!-- End of Banner section -->
@@ -122,59 +122,113 @@
             <div class="row">
 
                         <!-- START WRITING YOUR CODE FROM HERE -->
-<h2>Post Your Own Project or Idea</h2>
-<form role="form">
-  <div class="form-group">
-    <label for="exampleInputTitle">Title</label>
-    <input type="title" class="form-control" id="exampleInputTitle" placeholder="Title">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputDescription">Description</label>
-    <input type="description" class="form-control" id="exampleInputDescription" placeholder="Description">
-  </div>
-<form role="form">
-  <div class="form-group">
-    <label for="exampleInputSkills">Skills</label>
-    <input type="skills" class="form-control" id="exampleInputSkills" placeholder="Skills">
-  </div>
-<form role="form">
-  <div class="form-group">
-    <label for="exampleInputDeadlines">Deadlines</label>
-    <input type="deadlines" class="form-control" id="exampleInputDeadlines" placeholder="Deadlines">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputFile">File Input</label>
-    <input type="file" id="exampleInputFile">
-    <p class="help-block">Upload any files relating to your project.</p>
-  </div>
-<form role="form">
-  <div class="form-group">
-    <label for="exampleInputTeam">Team Size</label>
-    <input type="team" class="form-control" id="exampleInputTeam" placeholder="Team">
-  </div>
-<div class="radio">
-<label>
-  <input type="radio" name="paid" value="1" data-toggle="radio">
-  Paid
-</label>
-</div>
-<div class="radio">
-<label>
-  <input type="radio" name="Unpaid" value="2" data-toggle="radio" checked>
-  Unpaid
-</label>
-</div>
-</div>
-<form role="form">
-  <div class="form-group">
-    <label for="exampleInputDepartment">Department</label>
-    <input type="department" class="form-control" id="exampleInputDepartment" placeholder="Department">
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
 
+<form action="insertProject.php" method="post">
+
+    <h4 align'"center">Post Your Own Project or Idea</h4>
+<div class ="row">
+							<div class="col-xs-12"> 
+								
+
+										<strong class="uppercase">Title</strong>
+										<input type="text" class="form-control" name ="title" placeholder="Title of your Project/Idea">
+									</div>
+								</div>
+<br>									
+
+
+<div class ="row">
+							<div class="col-xs-12"> 
+								
+<strong class="uppercase">Description</strong>
+<textarea class="form-control" name="description" rows="5"></textarea>
+
+
+
+							</div>
+						</div>
+						<br>
+<div class ="row">
+							<div class="col-xs-12"> 								
+						<strong class="uppercase">Skills Required</strong>
+							<input type="text" class="form-control" name="skills" placeholder="Skills Needed for Project">
+							</div>
+						</div>
+						<br>
+
+<div class ="row">
+							<div class="col-xs-4"> 								
+						<strong class="uppercase">Deadline</strong>
+
+<input type="text" class="form-control" name="date" placeholder="YYYY-MM-DD">
+</div>
+</div>
+<br>
+
+<div class ="row">
+							<div class="col-xs-4"> 								
+						<strong class="uppercase">File Input</strong>
+	<input type="file" class="form-control" name="documents">
+    <p class="help-block">Provide any documents relating to the project.</p>
+<br>
+  </div>
+</div>
+
+<div class ="row">
+									<div class="col-xs-12 col-sm-4">
+										<strong class="uppercase">Team Size</strong>
+										<input type="text" class="form-control" name="size" placeholder="# of People Needed">
+										<br>
+									</div>
+								</div>
+
+<div class ="row">
+							<div class="col-xs-12"> 
+<strong class="uppercase">Paid/Unpaid</strong>
+								<div class="row">
+									<div class="col-xs-12 col-sm-8">
+										<label class="radio col-sm-3">
+										  <input type="radio" name="group1" value="1" data-toggle="radio">
+										  Paid
+										</label>
+										<label class="radio col-sm-3">
+										  <input type="radio" name="group1" value="2" data-toggle="radio">
+										  Unpaid
+										</label>
+										
+									</div>
+								</div>	
+		</div>
+		</div>			
+								<br>
+
+<div class ="row">
+							<div class="col-xs-4"> 
+<strong class="uppercase">Department</strong>
+
+<select class="form-control">
+  <option>Art & Science</option>
+  <option>Business Administration</option>
+  <option>Education</option>
+  <option>Engineering</option>
+  <option>Hospitality</option>
+  <option>Journalism</option>
+  <option>Music</option>
+  <option>Public Affairs</option>
+  <option>Visual Arts & Design</option>
+</select>
+</div>
+</div>
+<br>
+
+				<div class="div-center text-center">
+					<div class="form-actions">
+					<button class="btn btn-info btn-lg" input type="submit">Submit</button>
+				</div>
             </div>
+		</div>
         </div>
+<br>
 
         <div id="push"></div> <!-- This pushes the footer to the bottom -->
     
@@ -190,7 +244,13 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jasny-bootstrap.min.js"></script>
+	<script src="js/jquery.tagsinput.js"></script>
+	  <script src="js/flatui-radio.js"></script>
+	<script type='text/javascript'>
+		$(".tagsinput").tagsInput();
+	</script>
 
   </body>
 
 </html>
+
