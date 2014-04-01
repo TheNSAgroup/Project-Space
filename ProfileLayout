@@ -72,7 +72,7 @@
 		<br/>
 		<p class="white uppercase" id="hidden-menu-header">Quick links</p>
 		<ul class="nav navmenu-nav">
-            <li><a href="#">Post project</a></li>
+            <li><a href="form.html">Post project</a></li>
         </ul>
     </nav>
 
