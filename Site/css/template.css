@@ -4,7 +4,7 @@ html,body {
 }
 
 footer, #push, #header-top{
-    height: 100px;
+    height: 60px;
 }
 
 footer{
@@ -16,6 +16,11 @@ footer{
 /*Classes start here*/
 .container-fluid{
     padding: 0 15px;
+}
+
+.div-center{
+	float: none;
+	margin: 0 auto;
 }
 
 .white{
@@ -30,6 +35,23 @@ footer{
     text-transform: uppercase;
 }
 
+.account-text{
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.inactive-text{
+	color: #c6c6c6;
+}
+
+.text-right{
+	text-align: right;
+}
+
+#account-button{
+	margin-top: -5px;
+}
+
 /*ID tags start here*/
 #login-modal .modal-dialog{
     max-width: 400px;
@@ -42,7 +64,7 @@ footer{
 }
 
 #hidden-menu ul > li > a{
-    font-size: 13px;
+    font-size: 14px;
 }
 
 #hidden-menu-header{
@@ -54,11 +76,11 @@ footer{
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    margin: 0 auto -100px;
+    margin: 0 auto -60px;
 }
 
 #header-top{
-    padding-top: 25px;
+    padding-top: 15px;
 }
 
 #logo {
@@ -66,10 +88,7 @@ footer{
     height: 50px;
     margin: 0 auto;
     background: url("../images/logo.png") no-repeat center;
-}
-
-#login-text{
-    font-size: 18px;
+	margin-top: -10px;
 }
 
 #banner{
@@ -78,6 +97,7 @@ footer{
     height: 250px;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
 }
 
 #banner-text{
@@ -93,10 +113,18 @@ footer{
 	color: white;
 }
 
+#content{
+	padding: 30px 0 30px 0;
+}
+
 /*Media queries start here*/
 @media all and (max-width: 640px){
     #logo{
         width: 66px;
         background: url("../images/logo_small.png") no-repeat center;
     }
+	
+	.account-text{
+    font-size: 14px;
+	}
 }
