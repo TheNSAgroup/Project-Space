@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Project Space</title>
+    <title>Project Space - Sign up</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -82,15 +82,15 @@
 									
 					<!-- Will be show by default -->
                     <div id="login-text" class="show col-xs-2"> 
-						<div class="row  pull-right account-text">
-							<div class="col-sm-6 col-md-5 col-lg-4">
-								<a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
-							</div>
-							<div class="col-sm-6 col-md-5 col-lg-4">
-								<a href="signup.html">Signup</a>
-							</div>
-                    	</div>
-					</div>
+                        <div class="row  pull-right account-text">
+                            <div class="col-sm-6 col-md-5 col-lg-4">
+                                <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+                            </div>
+                            <div class="col-sm-6 col-md-5 col-lg-4">
+                                <a href="signup.html">Signup</a>
+                            </div>
+                        </div>
+                    </div>
 					
 					<!-- User account drop down. Only visible when logged in -->
 					<div id="account-button" class="hidden col-xs-4 col-sm-2">
@@ -109,8 +109,8 @@
 
                 <!-- Banner section starts here -->
                 <div class="row">
-                    <div class="col-xs-12" id="banner" style="background-image: url(images/banner1.jpg);">
-                        <h1 class="uppercase" id="banner-text">Page name goes here</h1> <!-- CHANGE THIS -->
+                    <div class="col-xs-12" id="banner" style="background-image: url(images/banner2.jpg);">
+                        <h1 class="uppercase" id="banner-text">Sign up</h1> <!-- CHANGE THIS -->
                     </div>
                 </div>
 				<!-- End of Banner section -->
@@ -120,9 +120,51 @@
         <!-- Page content starts here -->
         <div class="container">
             <div class="row">
+				<br/><br/>
+				<div class="col-xs-12 col-sm-7 col-lg-5 div-center">
+					<form action="signup.php" method="post" class="well well-lg text-center"  role="form">
+						
+						<label><strong class="uppercase">Name</strong></label>
+						<div class="form-group row col-sm-10 div-center">
+                            <div class="input-group">
+								<span class="input-group-addon"><span class="input-icon fui-user"></span></span>
+								<input type="text" class="form-control" name="firstName" placeholder="First name" required>
+							</div>							
+							<br/>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="input-icon fui-user"></span></span>
+								<input type="text" class="form-control" name="lastName" placeholder="Last name" required>
+                            </div>       
+						</div>
 
-                        <!-- START WRITING YOUR CODE FROM HERE -->
-
+						<br/>
+						
+						<label><strong class="uppercase">Email</strong></label>
+						<div class="form-group col-sm-10 div-center">
+							<div class="input-group">
+								<span class="input-group-addon"><span class="input-icon fui-mail"></span></span>
+								<input type="email" class="form-control" name="emailAddress" placeholder="Your email address" required>
+							</div>
+						</div>
+						
+						<br/>
+						
+						<label><strong class="uppercase">Password</strong></label>
+						<div class="form-group col-sm-10 div-center">
+							<div class="input-group">
+								<span class="input-group-addon"><span class="input-icon fui-lock"></span></span>
+								<input type="password" class="form-control" name="password" placeholder="Minimum 8 characters" required>
+							</div>
+						</div>
+						
+						<br/>
+						
+						<div class="form-actions">
+					  		<button type="submit" class="btn btn-info">Create my account</button>
+						</div>
+					</form>	
+				</div>
+                <br/>
             </div>
         </div>
 

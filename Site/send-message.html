@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Project Space</title>
+    <title>Project Space - Send message</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -110,7 +110,7 @@
                 <!-- Banner section starts here -->
                 <div class="row">
                     <div class="col-xs-12" id="banner" style="background-image: url(images/banner1.jpg);">
-                        <h1 class="uppercase" id="banner-text">Page name goes here</h1> <!-- CHANGE THIS -->
+                        <h1 class="uppercase" id="banner-text">Send message</h1> <!-- CHANGE THIS -->
                     </div>
                 </div>
 				<!-- End of Banner section -->
@@ -118,10 +118,27 @@
         </header>
 
         <!-- Page content starts here -->
-        <div class="container">
+        <div class="container" id="content">
             <div class="row">
 
-                        <!-- START WRITING YOUR CODE FROM HERE -->
+                <div class="col-xs-11 col-sm-8 col-md-6 div-center">
+				
+                    <form role="form" name="contactform" method="post" action="send-email.php">
+                      <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Your full name" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" name="email" placeholder="Your email address" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="message">Message</label>                        
+                        <textarea class="form-control" name="message" rows="8" placeholder="Enter your message here" required></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-info btn-block">Submit</button> 
+                    </form>
+                </div>
 
             </div>
         </div>

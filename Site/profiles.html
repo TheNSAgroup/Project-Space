@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Project Space</title>
+    <title>Project Space - Profiles</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -18,6 +18,15 @@
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .inactive-text{
+            color: #c6c6c6;
+        }
+
+        .text-left{
+            text-align: left;
+        }
+    </style>
   </head>
 
   <body>
@@ -53,11 +62,17 @@
     <!-- Hidden Menu -->
     <nav id="hidden-menu" class="navmenu navmenu-inverse navmenu-fixed-left offcanvas" role="navigation">
         <p class="white uppercase" id="hidden-menu-header">Menu</p>
-        <ul class="nav navmenu-nav uppercase">
-            <li><a href="template.html">Home</a></li>
+          <ul class="nav navmenu-nav uppercase">
+            <li><a href="home.html">Home</a></li>
             <li><a href="projects.html">Projects</a></li>
             <li><a href="profiles.html">Profiles</a></li>
-            <li><a href="about.html">About Us</a></li>
+			<li><a href="about.html">About</a></li>
+			<li><a href="contact.html">Contact</a></li>
+        </ul>
+		<br/>
+		<p class="white uppercase" id="hidden-menu-header">Quick links</p>
+		<ul class="nav navmenu-nav">
+            <li><a href="#">Post project</a></li>
         </ul>
     </nav>
 
@@ -73,27 +88,108 @@
                     <div class="col-xs-8"> 
                         <div id="logo"></div>
                     </div>
-                    <div class="col-xs-2"> 
-                        <a href="#" class="pull-right" id="login-text" data-toggle="modal" data-target="#login-modal">Login</a>
-                    </div>
+									
+					<!-- Will be show by default -->
+                    <div id="login-text" class="show col-xs-2"> 
+						<div class="row  pull-right account-text">
+							<div class="col-sm-6 col-md-5 col-lg-4">
+								<a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+							</div>
+							<div class="col-sm-6 col-md-5 col-lg-4">
+								<a href="signup.html">Signup</a>
+							</div>
+                    	</div>
+					</div>
+					
+					<!-- User account drop down. Only visible when logged in -->
+					<div id="account-button" class="hidden col-xs-4 col-sm-2">
+						<div class="dropdown pull-right">
+					    	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">First name<span class="caret"></span></button>
+					  		<span class="dropdown-arrow"></span>
+					  		<ul class="dropdown-menu">
+								<li><a href="#">Account</a></li>
+								<li><a href="#">Messages</a></li>
+								<li><a href="#">Logout</a></li>
+					  		</ul>
+						</div>
+					</div>
+					<!-- End of Main header menu -->
                 </div>
 
-                    <!-- Banner section starts here -->
+                <!-- Banner section starts here -->
                 <div class="row">
-                    <div class="col-xs-12" id="banner" style="background-image: url(images/banner1.jpg);">
+                    <div class="col-xs-12" id="banner" style="background-image: url(images/banner4.jpg);">
                         <h1 class="uppercase" id="banner-text">Profiles</h1> <!-- CHANGE THIS -->
                     </div>
                 </div>
+				<!-- End of Banner section -->
             </div>
         </header>
 
         <!-- Page content starts here -->
         <div class="container">
             <div class="row">
-
-                        <!-- START WRITING YOUR CODE FROM HERE -->
-
+                <br/><br/><br/>
+                <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5 div-center">
+                    <div class="form-group">
+                        <div class="input-group input-group-hg input-group-rounded">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn"><span class="fui-search"></span></button>
+                            </span>              
+                            <input type="text" class="form-control" placeholder="Search students by name or skill" id="searchProfiles">
+                        </div>
+                        <span class="help-block inactive-text text-center">Eg: C++, public relations, fashion design</span>
+                    </div>
+                </div>
             </div>
+            <br/><br/>
+            <div class="row">
+                <div class="col-md-3 text-center profile-box">
+                    <div class="well">
+                        <img class="img-circle" src="images/users/kf.jpg"/>
+                        <h5>Kristina Perry</h5>
+                        <p style="margin-top:-15px;">Journalist</p>
+                        <div class="text-left">
+                            <strong>Skills: </strong><p>Blogging, journal essays, story telling, news writing</p>
+                        </div>
+                        <button class="btn btn-danger">More..</button>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center profile-box">
+                    <div class="well">
+                        <img class="img-circle" src="images/users/eb.jpg"/>
+                        <h5>Edwell Brooks</h5>
+                        <p style="margin-top:-15px;">Web developer</p>
+                        <div class="text-left">
+                            <strong>Skills: </strong><p>PHP, Javascipt, angular JS, ruby, python</p>
+                        </div>
+                        <button class="btn btn-danger">More..</button>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center profile-box">
+                    <div class="well">
+                        <img class="img-circle" src="images/users/js.jpg"/>
+                        <h5>Jenny Shen</h5>
+                        <p style="margin-top:-15px;">Fashion designer</p>
+                        <div class="text-left">
+                            <strong>Skills: </strong><p>Developing patterns, fabric trends, producing concepts</p>
+                        </div>
+                        <button class="btn btn-danger">More..</button>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center profile-box">
+                    <div class="well">
+                        <img class="img-circle" src="images/users/hh.jpg"/>
+                        <h5>Herr Hasse</h5>
+                        <p style="margin-top:-15px;">Photographer</p>
+                        <div class="text-left">
+                            <strong>Skills: </strong><p>Fashion, portraits, composition, digital retouching</p>
+                        </div>
+                        <button class="btn btn-danger">More..</button>
+                    </div>
+                </div>
+            </div>
+            <br/><br/>
         </div>
 
         <div id="push"></div> <!-- This pushes the footer to the bottom -->
@@ -108,10 +204,12 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/jasny-bootstrap.min.js"></script>
-
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>   
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+    <script src="js/application.js"></script>
   </body>
 
 </html>
-

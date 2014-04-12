@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Project Space</title>
+    <title>Project Space - Projects</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -18,6 +18,18 @@
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
     <![endif]-->
+	  
+	  <style>
+	  	.text-gray{
+			color: gray;
+		}
+		.no-indent{
+			text-indent: -14px;
+		}
+		#project-header h4{
+			margin-bottom: 0px;
+		}
+	  </style>
   </head>
 
   <body>
@@ -109,8 +121,8 @@
 
                 <!-- Banner section starts here -->
                 <div class="row">
-                    <div class="col-xs-12" id="banner" style="background-image: url(images/banner1.jpg);">
-                        <h1 class="uppercase" id="banner-text">Page name goes here</h1> <!-- CHANGE THIS -->
+                    <div class="col-xs-12" id="banner" style="background-image: url(images/banner3.jpg);">
+                        <h1 class="uppercase" id="banner-text">Projects</h1> <!-- CHANGE THIS -->
                     </div>
                 </div>
 				<!-- End of Banner section -->
@@ -120,9 +132,75 @@
         <!-- Page content starts here -->
         <div class="container">
             <div class="row">
+					<br/>
+                    <div class="col-xs-12 col-md-8 div-center" >
+						
+						<section id="project-header">
+							<h4 id="projectTitle">Project Title</h4>
+							<small>Posted on <span id="posted-date">MM/DD/YYYY</span> under <span id="posting-dept">department name</span></small>
+						</section>
+						
+						<br>
+						
+						<section>
+						<p id="projectDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacus felis, accumsan in pulvinar at, fermentum vel augue. Vivamus vehicula quam nec nunc tristique venenatis. Aliquam erat volutpat. Maecenas augue nulla, iaculis et dui eget, posuere congue eros. Sed pharetra, lectus a pretium condimentum, nisl sem fringilla eros, iaculis vestibulum ligula neque eget magna. Aenean vehicula imperdiet nunc at gravida. Praesent nibh mi, gravida sit amet condimentum in, ultrices ac justo. Nam hendrerit venenatis nisi in elementum. 
+<br><br>
+Nulla vel tempor arcu, vel euismod lorem. Fusce in risus mattis, placerat est at, ornare risus. Integer mi ante, posuere a sagittis sed, egestas non ipsum. Sed sollicitudin, nulla et viverra tempus, urna ante euismod tellus, sollicitudin rhoncus sem est nec dolor. Donec ac nibh ac velit congue blandit vel eget leo. Proin odio nibh, dignissim vitae consectetur ac, porta a purus. Fusce ornare, erat sed feugiat volutpat, elit tortor blandit sapien, quis ullamcorper erat tortor ac purus. Phasellus enim nibh, euismod ac pulvinar ut, fermentum vitae nisi. Etiam ac elit risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
+</p>
+						</section>
+						
+						<br>
+						<section>
+							<span class="label label-primary" title="Team size">4 people</span>
+							<span class="label label-success" title="Stipend">$500</span>
+							<span class="label label-danger" title="Deadline">05/21/2014</span>
+						</section>
+						
+						<br>
+						
+						<section>
+							<strong>Required Skills: </strong>
+							<p id="projectSkills">PHP, JavaScript, CSS and HTML</p>
+							
+							<strong>Supplied documents: </strong>
+							<br>
+							<a href="#">Specifications.doc</a><br>
+							<a href="#">Logo.png</a>
+						</section>
+						
+						<br>
+						
+						<section class="div-center text-center">
+							<button class="btn btn-hg btn-info">Count me in</button>
+							<br>
+							<a href="#" class="small text-gray">Contact project moderator</a>
+						</section>
 
-                        <!-- START WRITING YOUR CODE FROM HERE -->
+						<br><br>
 
+						<section id="public-questions">
+								<h4>Public questions: </h4>
+
+								<div id="disqus_thread"></div>
+							<script type="text/javascript">
+								/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+								var disqus_shortname = 'projectspace'; // required: replace example with your forum shortname
+
+								/* * * DON'T EDIT BELOW THIS LINE * * */
+								(function() {
+									var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+									dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+									(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+								})();
+							</script>
+							<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+							<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+						</section>
+						
+</div>
+				
+<br><br>
             </div>
         </div>
 

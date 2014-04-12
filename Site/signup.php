@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Project Space</title>
+    <title>Project Space - Sign up</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -109,8 +109,8 @@
 
                 <!-- Banner section starts here -->
                 <div class="row">
-                    <div class="col-xs-12" id="banner" style="background-image: url(images/banner1.jpg);">
-                        <h1 class="uppercase" id="banner-text">Page name goes here</h1> <!-- CHANGE THIS -->
+                    <div class="col-xs-12" id="banner" style="background-image: url(images/banner2.jpg);">
+                        <h1 class="uppercase" id="banner-text">Sign up</h1> <!-- CHANGE THIS -->
                     </div>
                 </div>
 				<!-- End of Banner section -->
@@ -120,8 +120,43 @@
         <!-- Page content starts here -->
         <div class="container">
             <div class="row">
+				<br/><br/>
+				<div class="col-xs-10 col-lg-8 div-center">
+					<?php
+						$con=mysqli_connect("mysql.freehostingnoads.net","u342178811_nsa","untcsce4410","u342178811_ps");
+						// Check connection
+						if (mysqli_connect_errno())
+						  {
+						  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+						  }
 
-                        <!-- START WRITING YOUR CODE FROM HERE -->
+						$sql="INSERT INTO accountsTable (FirstName, LastName, Email, Password)
+												VALUES
+												('$_POST[firstName]','$_POST[lastName]','$_POST[emailAddress]','$_POST[password]')";
+
+						if (!mysqli_query($con,$sql))
+						  {?>
+						
+							<div class="alert alert-danger">
+										<h4><span class="input-icon fui-cross"> </span> Oops.. Something went wrong.</h4>
+							</div>
+						  
+						  <?php
+						  die();
+						  }?>
+						
+						<div class="alert alert-success text-center">
+							<h4><span class="input-icon fui-check"> </span> Your account was created successfully.</h4>	
+						</div>
+						<br/>
+						<h6>Get exposed</h6>
+						<p>If you are a student, create a profile and get exposed by thousands of people. With a student profile, you can list your educational background, experience and all the skills you have. People will even comment on your profile when you complete projects.</p>
+						<button class="btn btn-info btn-wide">Create my profile</button>
+						<?
+						mysqli_close($con);
+					?>
+					<br/><br/>
+				</div>
 
             </div>
         </div>
