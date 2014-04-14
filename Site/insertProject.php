@@ -55,7 +55,7 @@
         <p class="white uppercase" id="hidden-menu-header">Menu</p>
           <ul class="nav navmenu-nav uppercase">
             <li><a href="home.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
+            <li><a href="projects.php">Projects</a></li>
             <li><a href="profiles.html">Profiles</a></li>
 			<li><a href="about.html">About</a></li>
 			<li><a href="contact.html">Contact</a></li>
@@ -63,7 +63,7 @@
 		<br/>
 		<p class="white uppercase" id="hidden-menu-header">Quick links</p>
 		<ul class="nav navmenu-nav">
-            <li><a href="#">Post project</a></li>
+            <li><a href="form.html">Post project</a></li>
         </ul>
     </nav>
 
@@ -110,7 +110,7 @@
                 <!-- Banner section starts here -->
                 <div class="row">
                     <div class="col-xs-12" id="banner" style="background-image: url(images/banner2.jpg);">
-                        <h1 class="uppercase" id="banner-text">Sign up</h1> <!-- CHANGE THIS -->
+                        <h1 class="uppercase" id="banner-text">Post a Project</h1> <!-- CHANGE THIS -->
                     </div>
                 </div>
 				<!-- End of Banner section -->
@@ -129,12 +129,21 @@
 						  {
 						  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 						  }
+						#set vars for db entry	
+						$title = trim(addslashes($_POST['title']));	
+						$description = trim(addslashes($_POST['description']));	
+						$skills = trim(addslashes($_POST['skills']));	
+						$date = trim(stripslashes($_POST['date']));	
+						$size = trim(addslashes($_POST['size']));	
+						$group1 = trim(stripslashes($_POST['group1']));	
+						$department = trim(stripslashes($_POST['department']));	
 
-						$sql="INSERT INTO biologyTable (Title, Team Size, Description)
-												VALUES
-												('$_POST[title]','$_POST[size]','$_POST[description]')";
+						$tablename = "projects"; //table to insert to
+						$sql="INSERT INTO $tablename VALUES (NULL, '$title','$description','$skills','$date','$size','$group1','$department')";
 
-						if (!mysqli_query($con,$sql))
+						$run = mysqli_query($con, $sql);
+
+						if (!$run)
 						  {?>
 						
 							<div class="alert alert-danger">
