@@ -55,7 +55,7 @@
         <p class="white uppercase" id="hidden-menu-header">Menu</p>
           <ul class="nav navmenu-nav uppercase">
             <li><a href="home.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
+            <li><a href="projects.php">Projects</a></li>
             <li><a href="profiles.html">Profiles</a></li>
 			<li><a href="about.html">About</a></li>
 			<li><a href="contact.html">Contact</a></li>
@@ -63,7 +63,7 @@
 		<br/>
 		<p class="white uppercase" id="hidden-menu-header">Quick links</p>
 		<ul class="nav navmenu-nav">
-            <li><a href="#">Post project</a></li>
+            <li><a href="form.html">Post project</a></li>
         </ul>
     </nav>
 
@@ -79,7 +79,7 @@
                     <div class="col-xs-8"> 
                         <div id="logo"></div>
                     </div>
-									
+
 					<!-- Will be show by default -->
                     <div id="login-text" class="show col-xs-2"> 
 						<div class="row  pull-right account-text">
@@ -91,7 +91,7 @@
 							</div>
                     	</div>
 					</div>
-					
+
 					<!-- User account drop down. Only visible when logged in -->
 					<div id="account-button" class="hidden col-xs-4 col-sm-2">
 						<div class="dropdown pull-right">
@@ -128,10 +128,10 @@
     <h4 align'"center">Post Your Own Project or Idea</h4>
 <div class ="row">
 							<div class="col-xs-12"> 
-								
+
 
 										<strong class="uppercase">Title</strong>
-										<input type="text" class="form-control" name ="title" placeholder="Title of your Project/Idea">
+										<input type="text" class="form-control" name="title" placeholder="Title of your Project/Idea">
 									</div>
 								</div>
 <br>									
@@ -139,7 +139,7 @@
 
 <div class ="row">
 							<div class="col-xs-12"> 
-								
+
 <strong class="uppercase">Description</strong>
 <textarea class="form-control" name="description" rows="5"></textarea>
 
@@ -165,14 +165,6 @@
 </div>
 <br>
 
-<div class ="row">
-							<div class="col-xs-4"> 								
-						<strong class="uppercase">File Input</strong>
-	<input type="file" class="form-control" name="documents">
-    <p class="help-block">Provide any documents relating to the project.</p>
-<br>
-  </div>
-</div>
 
 <div class ="row">
 									<div class="col-xs-12 col-sm-4">
@@ -195,7 +187,7 @@
 										  <input type="radio" name="group1" value="2" data-toggle="radio">
 										  Unpaid
 										</label>
-										
+
 									</div>
 								</div>	
 		</div>
@@ -206,7 +198,7 @@
 							<div class="col-xs-4"> 
 <strong class="uppercase">Department</strong>
 
-<select class="form-control">
+<select class="form-control" name="department">
   <option>Art & Science</option>
   <option>Business Administration</option>
   <option>Education</option>
@@ -229,7 +221,7 @@
 		</div>
         </div>
 <br>
-
+</form>
         <div id="push"></div> <!-- This pushes the footer to the bottom -->
     
     </div>
