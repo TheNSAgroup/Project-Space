@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Project Space - Projects</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/ico" href="images/favicon.ico">
+    
+    <!-- Loading Bootstrap, Flat UI and custom site template -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+    <link href="css/flat-ui.css" rel="stylesheet">
+    <link href="css/template.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. -->
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .inactive-text{
+            color: #c6c6c6;
+        }
+
+        .text-right{
+            text-align: right;
+        }
+    </style>
+  </head>
+
+  <body>
+
+    <!--Login Modal -->
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Login</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Email address" class="form-control flat" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" class="form-control flat" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a class="pull-left lightgray" href="#">Forgot password?</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="login-btn">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Menu -->
+    <nav id="hidden-menu" class="navmenu navmenu-inverse navmenu-fixed-left offcanvas" role="navigation">
+        <p class="white uppercase" id="hidden-menu-header">Menu</p>
+          <ul class="nav navmenu-nav uppercase">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="projects.php">Projects</a></li>
+            <li><a href="profiles.html">Profiles</a></li>
+			<li><a href="about.html">About</a></li>
+			<li><a href="contact.html">Contact</a></li>
+        </ul>
+		<br/>
+		<p class="white uppercase" id="hidden-menu-header">Quick links</p>
+		<ul class="nav navmenu-nav">
+            <li><a href="form.html">Post project</a></li>
+        </ul>
+    </nav>
+
+    <div id="wrap">
+        <header>
+            <div class="container-fluid">
+
+                    <!-- Main header menu starts here -->
+                <div class="row" id="header-top">
+                    <div class="col-xs-2"> 
+                        <a href="#" data-toggle="offcanvas" data-target="#hidden-menu" data-canvas="body"><img src="images/sidemenuicon.svg" alt="Menu"/></a>
+                    </div>
+                    <div class="col-xs-8"> 
+                        <div id="logo"></div>
+                    </div>
+									
+					<!-- Will be show by default -->
+                    <div id="login-text" class="show col-xs-2"> 
+						<div class="row  pull-right account-text">
+							<div class="col-sm-6 col-md-5 col-lg-4">
+								<a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+							</div>
+							<div class="col-sm-6 col-md-5 col-lg-4">
+								<a href="signup.html">Signup</a>
+							</div>
+                    	</div>
+					</div>
+					
+					<!-- User account drop down. Only visible when logged in -->
+					<div id="account-button" class="hidden col-xs-4 col-sm-2">
+						<div class="dropdown pull-right">
+					    	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">First name<span class="caret"></span></button>
+					  		<span class="dropdown-arrow"></span>
+					  		<ul class="dropdown-menu">
+								<li><a href="#">Account</a></li>
+								<li><a href="#">Messages</a></li>
+								<li><a href="#">Logout</a></li>
+					  		</ul>
+						</div>
+					</div>
+					<!-- End of Main header menu -->
+                </div>
+
+                <!-- Banner section starts here -->
+                <div class="row">
+                    <div class="col-xs-12" id="banner" style="background-image: url(images/banner6.jpg);">
+                        <h1 class="uppercase" id="banner-text">Public Affairs Projects</h1> <!-- CHANGE THIS -->
+                    </div>
+                </div>
+				<!-- End of Banner section -->
+            </div>
+        </header>
+
+        <!-- Page content starts here -->
+        <div class="container">
+            <div class="row">
+                <br/>
+                <div class="col-xs-12">
+                    <p class="pull-right inactive-text"> 
+                    Sort by: <a href="#">date</a> / <a href="#" class="inactive-text">payment</a> / <a href="#" class="inactive-text">team size</a>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group">                               
+                            <input type="text" class="form-control" placeholder="Search projects" id="searchProjects">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn"><span class="fui-search"></span></button>
+                            </span>
+                        </div>
+                    </div>
+                    <ul class="nav navmenu-nav text-right">
+                        <li><a href="ArtsSciences.html" class="active-text">Arts & Science</a></li>
+                        <li><a href="Buisness.html" class="active-text">Business administration</a></li>
+                        <li><a href="Education.html" class="active-text">Education</a></li>
+                        <li><a href="Engineering.html" class="">Engineering</a></li>
+                        <li><a href="Hospitality.html" class="active-text">Hospitality</a></li>
+                        <li><a href="Journalism.html" class="active-text">Journalism</a></li>
+                        <li><a href="Music.html" class="active-text">Music</a></li>
+                        <li><a href="PublicAffairs.html" class="active-text">Public affairs</a></li>
+                        <li><a href="VisualArts.html" class="active-text">Visual arts & Design</a></li>
+                    </ul>
+                    <a class="btn btn-primary btn-wide pull-right" href="form.html" role="button">Post an idea/project</a>
+                    <br/><br/><br/>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-xs-12  well">
+                          <!--  <h6>Public Affairs</h6>
+                            <p>My company is currently seeking an individual to help us develop and launch a cloud-based platform for our Freight Tracking and Cargo Claims business. We will gladly offer recommendations and reasonable consulting fees in return for a job well done.</p>
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <span class="label label-default">03/25/2014</span>
+                                    <span class="label label-warning">Paid</span>
+                                    <span class="label label-success">4 people</span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="http://projectspace.t15.org/view-project.html"><button class="btn btn-danger pull-right" style="margin-top: -15px;" type="submit">More..</button></a>
+                                </div>
+                                <br/>
+                            </div>    
+                        </div>
+                    </div> -->
+
+                    <div class="row">
+                        <div class="col-xs-12  well">
+                            <h6>Public Affairs</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales sagittis libero, in vestibulum dolor placerat ut. Curabitur accumsan justo in justo pretium hendrerit. Curabitur accumsan, massa sed sodales facilisis, sem tortor varius nunc, sed ullamcorper tellus ligula eu metus.</p>
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <span class="label label-default">01/24/2014</span>
+                                    <span class="label label-warning">Paid</span>
+                                    <span class="label label-success">4 people</span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <button class="btn btn-danger pull-right" style="margin-top: -15px;">More..</button>
+                                </div>
+                                <br/>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12  well">
+                            <h6>Take over the world</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales sagittis libero, in vestibulum dolor placerat ut. Curabitur accumsan justo in justo pretium hendrerit. Curabitur accumsan, massa sed sodales facilisis, sem tortor varius nunc, sed ullamcorper tellus ligula eu metus.</p>
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <span class="label label-default">01/24/2014</span>
+                                    <span class="label label-warning">Paid</span>
+                                    <span class="label label-success">4 people</span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <button class="btn btn-danger pull-right" style="margin-top: -15px;">More..</button>
+                                </div>
+                                <br/>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12  well">
+                            <h6>Take over the world</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales sagittis libero, in vestibulum dolor placerat ut. Curabitur accumsan justo in justo pretium hendrerit. Curabitur accumsan, massa sed sodales facilisis, sem tortor varius nunc, sed ullamcorper tellus ligula eu metus.</p>
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <span class="label label-default">01/24/2014</span>
+                                    <span class="label label-warning">Paid</span>
+                                    <span class="label label-success">4 people</span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <button class="btn btn-danger pull-right" style="margin-top: -15px;">More..</button>
+                                </div>
+                                <br/>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12  well">
+                            <h6>Take over the world</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales sagittis libero, in vestibulum dolor placerat ut. Curabitur accumsan justo in justo pretium hendrerit. Curabitur accumsan, massa sed sodales facilisis, sem tortor varius nunc, sed ullamcorper tellus ligula eu metus.</p>
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <span class="label label-default">01/24/2014</span>
+                                    <span class="label label-warning">Paid</span>
+                                    <span class="label label-success">4 people</span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <button class="btn btn-danger pull-right" style="margin-top: -15px;">More..</button>
+                                </div>
+                                <br/>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <div class="row text-center">
+                        <div class="pagination">
+                          <ul>
+                            <li class="previous"><a href="#" class="fui-arrow-left"></a></li>
+                            <li class="active"><a href="#fakelink">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li class="next"><a href="#" class="fui-arrow-right"></a></li>
+                          </ul>
+                        </div>
+                    </div>
+                    <br/>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="push"></div> <!-- This pushes the footer to the bottom -->
+    
+    </div>
+    
+    <!-- footer starts here --> 
+    <footer>
+        <p id="footer-text">Made with love at University of North Texas</p>
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/jasny-bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>   
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+    <script src="js/application.js"></script>
+  </body>
+
+</html>
+<!-- Analytics Code -->
+<noscript><a title="create a website for free" href="http://t15.org">Create a Website for Free</a></noscript>
+<!-- Analytics Code END -->
