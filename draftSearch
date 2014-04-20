@@ -1,0 +1,21 @@
+<?php
+
+mysql_connect("http://projectspace.t15.org/", "u342178811_nsa", "untcsce4410")
+mysql_select_db("database");
+
+if(!empty($_GET['q'])){
+$query=mysql_real_escape_string(trim($_GET['q']));
+$searchSQL="SELECT * FROM accountsTable WHERE `skills` LIKE '%{$query}%'  LIMIT 20";
+$searchResult=mysql_query($searchSQL);
+
+while ($row=mysql_fetch_assoc($searchResult)){
+    $results[]="<a href='{$row['url']}' class='webresult'><div class='skills'>{$row['skills']}</div><div class='desc'>{$row['description']}</div><div class='url'>{$row['url']}</div></a>";
+}
+
+if(empty($results)){
+echo 'No results were found';
+} else {
+echo implode($results);
+}
+}
+?>
