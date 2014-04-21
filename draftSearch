@@ -1,17 +1,19 @@
 <?php
 
-mysql_connect("http://projectspace.t15.org/", "u342178811_nsa", "untcsce4410")
-mysql_select_db("database");
+mysql_connect("mysql.freehostingnoads.net", "u342178811_nsa", "untcsce4410") or die('Unable to connect to database!');
+mysql_select_db("u342178811_ps") or die(mysql_error());
 
-if(!empty($_GET['q'])){
-$query=mysql_real_escape_string(trim($_GET['q']));
+if(!empty($_GET['text'])){
+$query=mysql_real_escape_string(trim($_GET['text']));
 $searchSQL="SELECT * FROM accountsTable WHERE `skills` LIKE '%{$query}%'  LIMIT 20";
 $searchResult=mysql_query($searchSQL);
 
 while ($row=mysql_fetch_assoc($searchResult)){
-    $results[]="<a href='{$row['url']}' class='webresult'><div class='skills'>{$row['skills']}</div><div class='desc'>{$row['description']}</div><div class='url'>{$row['url']}</div></a>";
+    $results[]="<a href='{$row['url']}' class='webresult'><div class='skills'>{$row['skills']}</div></a>";
+#include counter to display all rows
+    #how do i display results
 }
-
+ 
 if(empty($results)){
 echo 'No results were found';
 } else {
