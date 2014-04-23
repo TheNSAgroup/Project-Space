@@ -109,8 +109,8 @@
 
                 <!-- Banner section starts here -->
                 <div class="row">
-                    <div class="col-xs-12" id="banner" style="background-image: url(images/banner1.jpg);">
-                        <h1 class="uppercase" id="banner-text">Post a Project</h1> <!-- CHANGE THIS -->
+                    <div class="col-xs-12" id="banner" style="background-image: url(images/banner7.jpg);">
+                        <h1 class="uppercase" id="banner-text">Post project</h1> <!-- CHANGE THIS -->
                     </div>
                 </div>
 				<!-- End of Banner section -->
@@ -120,108 +120,93 @@
         <!-- Page content starts here -->
         <div class="container">
             <div class="row">
+				
+				<br>
+				
+               <div class="col-xs-12 col-md-8 div-center">
+				<form action="insertProject.php" method="post" enctype="multipart/form-data">
+					<strong class="uppercase">Title</strong>
+					<input type="text" class="form-control" name="title" placeholder="Title of your project or idea" required>
 
-                        <!-- START WRITING YOUR CODE FROM HERE -->
+					<br>									
 
-<form action="insertProject.php" method="post">
+					<strong class="uppercase">Description</strong>
+					<textarea class="form-control" name="description" rows="5" placeholder="Provide a little bit of information about your posting" required></textarea>
 
-    <h4 align'"center">Post Your Own Project or Idea</h4>
-<div class ="row">
-							<div class="col-xs-12"> 
+					<br>
 
+					<strong class="uppercase">Skills Required</strong>
+					<input type="text" class="form-control" name="skills" placeholder="Skills Needed for Project" required>
 
-										<strong class="uppercase">Title</strong>
-										<input type="text" class="form-control" name="title" placeholder="Title of your Project/Idea">
-									</div>
-								</div>
-<br>									
+					<br>
 
+					<strong class="uppercase">Deadline</strong>
+					<input type="text" class="form-control" name="date" placeholder="YYYY-MM-DD" required>
 
-<div class ="row">
-							<div class="col-xs-12"> 
+					<br>
 
-<strong class="uppercase">Description</strong>
-<textarea class="form-control" name="description" rows="5"></textarea>
+					<strong class="uppercase">Team Size</strong>
+					<input type="text" class="form-control" name="size" placeholder="How many students do you need?" required>
 
+					<br>
 
-
-							</div>
+					<strong class="uppercase">Contact</strong>
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<input type="text" class="form-control" name="phone" placeholder="Phone number">
 						</div>
-						<br>
-<div class ="row">
-							<div class="col-xs-12"> 								
-						<strong class="uppercase">Skills Required</strong>
-							<input type="text" class="form-control" name="skills" placeholder="Skills Needed for Project">
-							</div>
+						<div class="col-xs-12 col-sm-6">
+							<input type="email" class="form-control" name="contact" placeholder="Email address" required>
 						</div>
-						<br>
+					</div>
+					<br>
 
-<div class ="row">
-							<div class="col-xs-4"> 								
-						<strong class="uppercase">Deadline</strong>
+					<strong class="uppercase">Paid/Unpaid</strong>
+					<div class="row">
+						<div class="col-xs-12">
+							<label class="radio col-sm-3">
+								<input type="radio" name="group1" value="1" data-toggle="radio">Paid</label>
+							<label class="radio col-sm-3">
+								<input type="radio" name="group1" value="2" data-toggle="radio">Unpaid
+							</label>
+						</div>
+					</div>
+					
+					<br>
+					
+					<strong class="uppercase">Department</strong>
+					<select class="form-control" name="department">
+					  <option>Arts & Science</option>
+					  <option>Business Administration</option>
+					  <option>Education</option>
+					  <option>Engineering</option>
+					  <option>Hospitality</option>
+					  <option>Journalism</option>
+					  <option>Music</option>
+					  <option>Public Affairs</option>
+					  <option>Visual Arts & Design</option>
+					</select>
+					
 
-<input type="text" class="form-control" name="date" placeholder="YYYY-MM-DD">
-</div>
-</div>
-<br>
+					<br>
+					<strong class="uppercase">File</strong>
+					<p>Upload a file relating to your project or idea.</p>
+					<input type="file" name="file">					
+					<br>
 
-
-<div class ="row">
-									<div class="col-xs-12 col-sm-4">
-										<strong class="uppercase">Team Size</strong>
-										<input type="text" class="form-control" name="size" placeholder="# of People Needed">
-										<br>
-									</div>
-								</div>
-
-<div class ="row">
-							<div class="col-xs-12"> 
-<strong class="uppercase">Paid/Unpaid</strong>
-								<div class="row">
-									<div class="col-xs-12 col-sm-8">
-										<label class="radio col-sm-3">
-										  <input type="radio" name="group1" value="1" data-toggle="radio">
-										  Paid
-										</label>
-										<label class="radio col-sm-3">
-										  <input type="radio" name="group1" value="2" data-toggle="radio">
-										  Unpaid
-										</label>
-
-									</div>
-								</div>	
+					<div class="div-center text-center">
+						<div class="form-actions">
+						<button class="btn btn-info btn-lg" input type="submit">Post project</button>
+						</div>
+					</div>
+				</form>
+				   
+				   <br>
 		</div>
-		</div>			
-								<br>
 
-<div class ="row">
-							<div class="col-xs-4"> 
-<strong class="uppercase">Department</strong>
-
-<select class="form-control" name="department">
-  <option>Art & Science</option>
-  <option>Business Administration</option>
-  <option>Education</option>
-  <option>Engineering</option>
-  <option>Hospitality</option>
-  <option>Journalism</option>
-  <option>Music</option>
-  <option>Public Affairs</option>
-  <option>Visual Arts & Design</option>
-</select>
-</div>
-</div>
-<br>
-
-				<div class="div-center text-center">
-					<div class="form-actions">
-					<button class="btn btn-info btn-lg" input type="submit">Submit</button>
-				</div>
             </div>
-		</div>
         </div>
-<br>
-</form>
+
         <div id="push"></div> <!-- This pushes the footer to the bottom -->
     
     </div>
@@ -245,4 +230,3 @@
   </body>
 
 </html>
-
