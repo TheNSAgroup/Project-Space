@@ -1,3 +1,67 @@
+<?php
+
+session_start();
+
+$url  = @( $_SERVER["HTTPS"] != 'on' ) ? 'http://'.$_SERVER["SERVER_NAME"] :  'https://'.$_SERVER["SERVER_NAME"];
+$url .= $_SERVER["REQUEST_URI"];
+
+if (isset($_GET['id'])) {
+	$ID = urldecode($_GET['id']);
+} else {
+	$ID = '';
+} //end if
+
+$host = "mysql.freehostingnoads.net";
+$username="u342178811_nsa";
+$password="untcsce4410";
+$db_name="u342178811_ps";
+$tbl_name="projects";
+
+$link = mysqli_connect("$host","$username","$password","$db_name") or die("Error " . mysqli_error($link));
+
+
+$sql="SELECT * FROM $tbl_name WHERE id='$ID'";
+
+
+if ($result = mysqli_query($link, $sql)) {
+	$row = $result->fetch_array(MYSQLI_BOTH);
+	$id = $row['id'];
+	$title = $row['title'];
+	$desc = $row['description'];
+	$skills = $row['skills'];
+	$deadline = $row['deadline'];
+	$teamSize = $row['team'];
+	$paid = $row['paid'];
+	$dept = $row['department'];
+	$contactEmail = $row['contact'];
+	$phone = $row['phone'];
+	$postDate = $row['postDate'];
+	//$contactName = $row['postby']; This will need to be corrected when security is added, do not store this value in the projects table
+	$filename = $row['filename'];		
+		
+	if($teamSize > 1){
+		$teamSize = $teamSize . " people";
+	}else{
+		$teamSize = "1 person";
+	}
+
+	if ($paid == 1){
+		$paid = "Paid";
+	}else{
+		$paid = "Unpaid";
+	}
+	
+	if($phone == ""){
+		$phone = "Not available";
+	}
+
+	$desc = preg_replace('/\n(\s*\n)+/', '</p><p>', $desc);
+	$desc = preg_replace('/\n/', '<br>', $desc);
+	$desc = '<p>'.$desc.'</p>';
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -43,31 +107,54 @@
                     <h4 class="modal-title" id="myModalLabel">Login</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form">
+                    <form role="form" id="login-form" action="login.php" method="post">
                         <div class="form-group">
-                            <input type="text" placeholder="Email address" class="form-control flat" />
+                            <input type="text" name="email" id="email" placeholder="Email address" class="form-control flat" />
                         </div>
 
                         <div class="form-group">
-                            <input type="password" placeholder="Password" class="form-control flat" />
+                            <input type="password" name="password" id="password" placeholder="Password" class="form-control flat" />
                         </div>
-                    </form>
+                    	
+						<input type="hidden" name="url" value="<?php echo $url ?>">
                 </div>
                 <div class="modal-footer">
-                    <a class="pull-left lightgray" href="#">Forgot password?</a>
+                    <a class="pull-left lightgray" href="forgot.php">Forgot password?</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="login-btn">Login</button>
+                    <button type="submit" class="btn btn-primary" id="login-btn" value="submit">Login</button>
+					</form>
                 </div>
             </div>
         </div>
     </div>
 
+	<!-- Project moderator info modal -->
+	<div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">Contact info</h4>
+		  </div>
+		  <div class="modal-body text-center">
+			<h5><?php //echo $contactName;  This will need to be corrected when security is added, do not store this value in the projects table ?></h5>
+			<p><span class="glyphicon glyphicon-earphone"> </span> <?php echo $phone; ?></p>
+			<span class="glyphicon glyphicon-envelope"> </span><a href="mailto:<?php echo $contactEmail; ?>"> <?php echo $contactEmail; ?></a>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  </div>
+		</div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	  
+	  
     <!-- Hidden Menu -->
     <nav id="hidden-menu" class="navmenu navmenu-inverse navmenu-fixed-left offcanvas" role="navigation">
         <p class="white uppercase" id="hidden-menu-header">Menu</p>
           <ul class="nav navmenu-nav uppercase">
             <li><a href="home.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
+            <li><a href="projects.php">Projects</a></li>
             <li><a href="profiles.html">Profiles</a></li>
 			<li><a href="about.html">About</a></li>
 			<li><a href="contact.html">Contact</a></li>
@@ -107,12 +194,12 @@
 					<!-- User account drop down. Only visible when logged in -->
 					<div id="account-button" class="hidden col-xs-4 col-sm-2">
 						<div class="dropdown pull-right">
-					    	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">First name<span class="caret"></span></button>
+					    	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['name']; ?><span class="caret"></span></button>
 					  		<span class="dropdown-arrow"></span>
 					  		<ul class="dropdown-menu">
 								<li><a href="#">Account</a></li>
-								<li><a href="#">Messages</a></li>
-								<li><a href="#">Logout</a></li>
+								<li><a href="my-posts.php">My posts</a></li>
+								<li><a href="#" id="logout">Logout</a></li>
 					  		</ul>
 						</div>
 					</div>
@@ -136,50 +223,53 @@
                     <div class="col-xs-12 col-md-8 div-center" >
 						
 						<section id="project-header">
-							<h4 id="projectTitle">Project Title</h4>
-							<small>Posted on <span id="posted-date">MM/DD/YYYY</span> under <span id="posting-dept">department name</span></small>
+							<h4 id="projectTitle"><?php echo $title ?></h4>
+							<small class="text-gray">Posted on <span id="posted-date"><?php echo $postDate ?></span> under <span id="posting-dept"><?php echo $dept ?></span></small>
 						</section>
 						
 						<br>
 						
 						<section>
-						<p id="projectDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacus felis, accumsan in pulvinar at, fermentum vel augue. Vivamus vehicula quam nec nunc tristique venenatis. Aliquam erat volutpat. Maecenas augue nulla, iaculis et dui eget, posuere congue eros. Sed pharetra, lectus a pretium condimentum, nisl sem fringilla eros, iaculis vestibulum ligula neque eget magna. Aenean vehicula imperdiet nunc at gravida. Praesent nibh mi, gravida sit amet condimentum in, ultrices ac justo. Nam hendrerit venenatis nisi in elementum. 
-<br><br>
-Nulla vel tempor arcu, vel euismod lorem. Fusce in risus mattis, placerat est at, ornare risus. Integer mi ante, posuere a sagittis sed, egestas non ipsum. Sed sollicitudin, nulla et viverra tempus, urna ante euismod tellus, sollicitudin rhoncus sem est nec dolor. Donec ac nibh ac velit congue blandit vel eget leo. Proin odio nibh, dignissim vitae consectetur ac, porta a purus. Fusce ornare, erat sed feugiat volutpat, elit tortor blandit sapien, quis ullamcorper erat tortor ac purus. Phasellus enim nibh, euismod ac pulvinar ut, fermentum vitae nisi. Etiam ac elit risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
+						<p id="projectDescription">
+						<?php echo $desc ?>
 </p>
 						</section>
 						
 						<br>
 						<section>
-							<span class="label label-primary" title="Team size">4 people</span>
-							<span class="label label-success" title="Stipend">$500</span>
-							<span class="label label-danger" title="Deadline">05/21/2014</span>
+							<span class="label label-primary" title="Team size"><?php echo $teamSize ?></span>
+							<span class="label label-success" title="Stipend"><?php echo $paid ?></span>
+							<span class="label label-warning" title="Deadline"><?php echo $deadline ?></span>
 						</section>
 						
 						<br>
 						
 						<section>
 							<strong>Required Skills: </strong>
-							<p id="projectSkills">PHP, JavaScript, CSS and HTML</p>
-							
-							<strong>Supplied documents: </strong>
-							<br>
-							<a href="#">Specifications.doc</a><br>
-							<a href="#">Logo.png</a>
+							<p id="projectSkills"><?php echo $skills ?></p>
 						</section>
+
+						<section>
+							<strong>File: </strong>
+							<p id="file"><a href="./files/<?php echo $filename; ?>"><?php echo substr($filename,strlen($id),strlen($filename) - strlen($id)); #this is where the file is listed?></a></p>
+						</section>
+
 						
 						<br>
 						
 						<section class="div-center text-center">
-							<button class="btn btn-hg btn-info">Count me in</button>
-							<br>
-							<a href="#" class="small text-gray">Contact project moderator</a>
+							<form action="<?php if($_SESSION['name'] == ""){echo "#header-top"; }else{ echo "join-project.php";}?>" method="post">
+								<input type="hidden" name="emailto" value="<?php echo $contactEmail ?>">
+								<input type="hidden" name="emailfrom" value="<?php echo $_SESSION['email'] ?>">
+								<input type="submit" name="submit" value="Count me in" class="btn btn-hg btn-info" id="joinButton">
+							</form>
+							<a href="#" data-toggle="modal" data-target="#info-modal" class="small text-gray">Contact project moderator</a>
 						</section>
 
 						<br><br>
 
 						<section id="public-questions">
-								<h4>Public questions: </h4>
+								<h4>Questions & answers </h4>
 
 								<div id="disqus_thread"></div>
 							<script type="text/javascript">
@@ -212,13 +302,41 @@ Nulla vel tempor arcu, vel euismod lorem. Fusce in risus mattis, placerat est at
     <footer>
         <p id="footer-text">Made with love at University of North Texas</p>
     </footer>
-
+	  
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jasny-bootstrap.min.js"></script>
 
+	<script type="text/javascript">
+		function checkLoggedIn(){
+			var accountName = "<?php echo $_SESSION['name'];?>"
+			if (accountName == ""){
+				alert("Please login to continue");
+			}
+		}
+
+		document.getElementById('joinButton').onclick=checkLoggedIn;
+	</script>
+	
+	<script type="text/javascript">
+		uname = "<?php echo $_SESSION['name'];?>";
+		
+		if (uname!=("")){//indicaates that no one is logged in
+			$('#account-button').toggleClass('hidden');
+			$('#login-text').toggleClass('hidden');
+		}
+	</script>
+	  
+	<script type="text/javascript">
+		var myEl = document.getElementById('logout');
+
+		myEl.addEventListener('click', function() {
+			window.location.href = 'logout.php'
+		}, false);
+ 	</script>
+	  
   </body>
 
 </html>
