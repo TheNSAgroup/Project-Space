@@ -55,7 +55,7 @@
         <p class="white uppercase" id="hidden-menu-header">Menu</p>
           <ul class="nav navmenu-nav uppercase">
             <li><a href="home.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
+            <li><a href="projects.php">Projects</a></li>
             <li><a href="profiles.html">Profiles</a></li>
 			<li><a href="about.html">About</a></li>
 			<li><a href="contact.html">Contact</a></li>
