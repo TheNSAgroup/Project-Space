@@ -1,6 +1,9 @@
 <?php 
 	session_start();
-	
+
+	$url  = @( $_SERVER["HTTPS"] != 'on' ) ? 'http://'.$_SERVER["SERVER_NAME"] :  'https://'.$_SERVER["SERVER_NAME"];
+	$url .= $_SERVER["REQUEST_URI"];
+
 	if (isset($_GET['sort'])) {
 		$sort = urldecode($_GET['sort']);
 	} else {
@@ -61,20 +64,22 @@
                     <h4 class="modal-title" id="myModalLabel">Login</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form">
+                    <form role="form" id="login-form" action="login.php" method="post">
                         <div class="form-group">
-                            <input type="text" placeholder="Email address" class="form-control flat" />
+                            <input type="text" name="email" id="email" placeholder="Email address" class="form-control flat" />
                         </div>
 
                         <div class="form-group">
-                            <input type="password" placeholder="Password" class="form-control flat" />
+                            <input type="password" name="password" id="password" placeholder="Password" class="form-control flat" />
                         </div>
-                    </form>
+                    	
+						<input type="hidden" name="url" value="<?php echo $url ?>">
                 </div>
                 <div class="modal-footer">
-                    <a class="pull-left lightgray" href="#">Forgot password?</a>
+                    <a class="pull-left lightgray" href="forgot.php">Forgot password?</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="login-btn">Login</button>
+                    <button type="submit" class="btn btn-primary" id="login-btn" value="submit">Login</button>
+					</form>
                 </div>
             </div>
         </div>
@@ -106,12 +111,12 @@
                     <div class="col-xs-2"> 
                         <a href="#" data-toggle="offcanvas" data-target="#hidden-menu" data-canvas="body"><img src="images/sidemenuicon.svg" alt="Menu"/></a>
                     </div>
-                    <div class="col-xs-6 col-sm-8"> 
+                    <div class="col-xs-8"> 
                         <div id="logo"></div>
                     </div>
-									
+
 					<!-- Will be show by default -->
-                    <div id="login-text" class="col-xs-2"> 
+                    <div id="login-text" class="show col-xs-2"> 
 						<div class="row  pull-right account-text">
 							<div class="col-sm-6 col-md-5 col-lg-4">
 								<a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
@@ -121,6 +126,7 @@
 							</div>
                     	</div>
 					</div>
+
 					
 					<!-- User account drop down. Only visible when logged in -->
 					<div id="account-button" class="hidden col-xs-4 col-sm-2">
@@ -129,7 +135,7 @@
 					  		<span class="dropdown-arrow"></span>
 					  		<ul class="dropdown-menu">
 								<li><a href="#">Account</a></li>
-								<li><a href="#">My posts</a></li>
+								<li><a href="my-posts.php">My posts</a></li>
 								<li><a href="#" id="logout">Logout</a></li>
 					  		</ul>
 						</div>
@@ -153,7 +159,7 @@
                 <br/>
                 <div class="col-xs-12">
                     <p class="pull-right inactive-text"> 
-                    Sort by: <a href="projects.php?sort=<?php echo urlencode("deadline");?>&dept=<?php echo urlencode($dept); ?>" class="active-text">date</a> / 
+                    Sort by: <a href="projects.php?sort=<?php echo urlencode("deadline");?>&dept=<?php echo urlencode($dept); ?>" class="active-text">deadline</a> / 
 					<a href="projects.php?sort=<?php echo urlencode("paid");?>&dept=<?php echo urlencode($dept); ?>" class="active-text">payment</a> / 
 					<a href="projects.php?sort=<?php echo urlencode("team");?>&dept=<?php echo urlencode($dept); ?>" class="active-text">team size</a>
                     </p>
@@ -162,12 +168,14 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <div class="input-group">                               
-                            <input type="text" class="form-control" placeholder="Search projects" id="searchProjects">
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn"><span class="fui-search"></span></button>
-                            </span>
-                        </div>
+						<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+							<div class="input-group">                               
+								<input type="text" class="form-control" name="keywords" placeholder="Search projects" id="searchProjects">
+								<span class="input-group-btn">
+									<button type="submit" class="btn"><span class="fui-search"></span></button>
+								</span>
+							</div>
+						</form>
                     </div>
                     <ul class="nav navmenu-nav text-right">
                         <li><a href="projects.php?sort=<?php echo urlencode($sort);?>&dept=<?php echo urlencode("Arts & Science"); ?>" class="active-text">Arts & Science</a></li>
@@ -188,6 +196,7 @@
 
 
 						$con=mysqli_connect("mysql.freehostingnoads.net","u342178811_nsa","untcsce4410","u342178811_ps");
+
 						// Check connection
 						if (mysqli_connect_errno())
 						  {
@@ -195,55 +204,92 @@
 						  }
 						#set vars for db entry	
 						if (isset($_GET['sort'])) {
-							$sort = urldecode($_GET['sort']);
+							$sort = addslashes(urldecode($_GET['sort']));
 						} else {
 							$sort = '';
 						} //end if
 
 						if (isset($_GET['dept'])) {
-							$dept = urldecode($_GET['dept']);
+							$dept = addslashes(urldecode($_GET['dept']));
 						} else {
 							$dept = '';
 						} //end if
 																			
 						$tablename = "projects"; //table to insert to
-						$sql="SELECT * FROM $tablename";
-						if (strlen($dept) > 0) {
-							$sql .= " WHERE department = '$dept'";
-						} //end if
 
-						if (strlen($sort) > 0) {
-							$sql .= " ORDER BY $sort ASC";
+						if ( (isset($_POST['keywords'])) and (!empty($_POST['keywords'])) ) {
+							$keywords = $_POST['keywords'];
+							$sql="SELECT * FROM $tablename WHERE title LIKE '%$keywords%' OR description LIKE '%$keywords%' OR skills LIKE '%$keywords%'";
+						} else {															
+							$sql="SELECT * FROM $tablename";
+							
+							if (strlen($dept) > 0) {
+								$sql .= " WHERE department = '$dept'";
+							} //end if
+	
+							if (strlen($sort) > 0) {
+								$sql .= " ORDER BY $sort ASC";
+							} //end if
 						} //end if
 
 						if ($result = mysqli_query($con, $sql)) {
-						
+							
+							if (mysqli_num_rows($result) == 0) { 
+								echo "<br><br>";
+							   echo "<div class=\"col-xs-12 text-center\">";
+								echo "<h4 class=\"lightgray\">No projects posted in this category</h4>";
+									echo "</div>";
+								echo "<br><br>";
+							} 
+							
 							while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+
 								$title = stripslashes($row['title']);
 								$description = stripslashes($row['description']);
 								$skills = stripslashes($row['skills']);
 								$date = $row['deadline'];
 								$team = stripslashes($row['team']);
+								$contact = stripslashes($row['contact']);
 								$paid = $row['paid'];
+								$ID = $row['id'];
+								$department = $row['department'];
 								if ($paid == 1) {
 									$paid = "paid";
 								} else {
 									$paid = "unpaid";		
 								} //end if
-								$department = $row['department'];;
+								
+								if($team > 1){
+									$team = $team . " people";
+								}else{
+									$team = "1 person";
+								}
+								
+								$description = preg_replace( "/\r|\n/", "", $description);
+								if (strlen($description) > 300){
+									$description = wordwrap($description, 300);
+									$description = explode("\n", $description);
+									$description = $description[0] . '...';
+								}
 ?>
 	                    <div class="row">
                         <div class="col-xs-12  well">
                             <h6><?php echo $title; ?></h6>
-                            <p><?php echo $description; ?></p>
+                            <p><?php echo $description;
+					echo "<br>";
+					
+					
+ 				?></p>
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <span class="label label-default"><?php echo $date; ?></span>
-                                    <span class="label label-warning"><?php echo $paid; ?></span>
-                                    <span class="label label-success"><?php echo $team; ?></span>
+                                    <span class="label label-primary" title="Team size"><?php echo $team ?></span>
+									<span class="label label-success" title="Stipend"><?php echo $paid ?></span>
+									<span class="label label-warning" title="Deadline"><?php echo $date ?></span>
                                 </div>
                                 <div class="col-xs-4">
-                                    <button class="btn btn-danger pull-right" style="margin-top: -15px;">More..</button>
+									<form action="view-project.php?id=<?php echo $ID ?>" method="post">
+										<input type="submit" class="btn btn-danger pull-right" name="submit" value="More.." style="margin-top: -15px;">
+									</form>
                                 </div>
                                 <br/>
                             </div>    
@@ -259,109 +305,6 @@
 						
 ?>
 
-<!--
-                    <div class="row">
-                        <div class="col-xs-12  well">
-                            <h6>Take over the world</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales sagittis libero, in vestibulum dolor placerat ut. Curabitur accumsan justo in justo pretium hendrerit. Curabitur accumsan, massa sed sodales facilisis, sem tortor varius nunc, sed ullamcorper tellus ligula eu metus.</p>
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <span class="label label-default">01/24/2014</span>
-                                    <span class="label label-warning">Paid</span>
-                                    <span class="label label-success">4 people</span>
-                                </div>
-                                <div class="col-xs-4">
-                                    <button class="btn btn-danger pull-right" style="margin-top: -15px;">More..</button>
-                                </div>
-                                <br/>
-                            </div>    
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12  well">
-                            <h6>Take over the world</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales sagittis libero, in vestibulum dolor placerat ut. Curabitur accumsan justo in justo pretium hendrerit. Curabitur accumsan, massa sed sodales facilisis, sem tortor varius nunc, sed ullamcorper tellus ligula eu metus.</p>
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <span class="label label-default">01/24/2014</span>
-                                    <span class="label label-warning">Paid</span>
-                                    <span class="label label-success">4 people</span>
-                                </div>
-                                <div class="col-xs-4">
-                                    <button class="btn btn-danger pull-right" style="margin-top: -15px;">More..</button>
-                                </div>
-                                <br/>
-                            </div>    
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12  well">
-                            <h6>Take over the world</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales sagittis libero, in vestibulum dolor placerat ut. Curabitur accumsan justo in justo pretium hendrerit. Curabitur accumsan, massa sed sodales facilisis, sem tortor varius nunc, sed ullamcorper tellus ligula eu metus.</p>
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <span class="label label-default">01/24/2014</span>
-                                    <span class="label label-warning">Paid</span>
-                                    <span class="label label-success">4 people</span>
-                                </div>
-                                <div class="col-xs-4">
-                                    <button class="btn btn-danger pull-right" style="margin-top: -15px;">More..</button>
-                                </div>
-                                <br/>
-                            </div>    
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12  well">
-                            <h6>Take over the world</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales sagittis libero, in vestibulum dolor placerat ut. Curabitur accumsan justo in justo pretium hendrerit. Curabitur accumsan, massa sed sodales facilisis, sem tortor varius nunc, sed ullamcorper tellus ligula eu metus.</p>
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <span class="label label-default">01/24/2014</span>
-                                    <span class="label label-warning">Paid</span>
-                                    <span class="label label-success">4 people</span>
-                                </div>
-                                <div class="col-xs-4">
-                                    <button class="btn btn-danger pull-right" style="margin-top: -15px;">More..</button>
-                                </div>
-                                <br/>
-                            </div>    
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12  well">
-                            <h6>Take over the world</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sodales sagittis libero, in vestibulum dolor placerat ut. Curabitur accumsan justo in justo pretium hendrerit. Curabitur accumsan, massa sed sodales facilisis, sem tortor varius nunc, sed ullamcorper tellus ligula eu metus.</p>
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <span class="label label-default">01/24/2014</span>
-                                    <span class="label label-warning">Paid</span>
-                                    <span class="label label-success">4 people</span>
-                                </div>
-                                <div class="col-xs-4">
-                                    <button class="btn btn-danger pull-right" style="margin-top: -15px;">More..</button>
-                                </div>
-                                <br/>
-                            </div>    
-                        </div>
-                    </div>
--->
-                    <div class="row text-center">
-                        <div class="pagination">
-                          <ul>
-                            <li class="previous"><a href="#" class="fui-arrow-left"></a></li>
-                            <li class="active"><a href="#fakelink">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li class="next"><a href="#" class="fui-arrow-right"></a></li>
-                          </ul>
-                        </div>
-                    </div>
                     <br/>
 
                 </div>
