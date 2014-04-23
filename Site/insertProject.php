@@ -55,7 +55,7 @@
         <p class="white uppercase" id="hidden-menu-header">Menu</p>
           <ul class="nav navmenu-nav uppercase">
             <li><a href="home.html">Home</a></li>
-            <li><a href="projects.php">Projects</a></li>
+            <li><a href="projects.html">Projects</a></li>
             <li><a href="profiles.html">Profiles</a></li>
 			<li><a href="about.html">About</a></li>
 			<li><a href="contact.html">Contact</a></li>
@@ -123,23 +123,35 @@
 				<br/><br/>
 				<div class="col-xs-10 col-lg-8 div-center">
 					<?php
+					
 						$con=mysqli_connect("mysql.freehostingnoads.net","u342178811_nsa","untcsce4410","u342178811_ps");
+
 						// Check connection
 						if (mysqli_connect_errno())
 						  {
 						  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 						  }
+						  
+						  
 						#set vars for db entry	
 						$title = trim(addslashes($_POST['title']));	
 						$description = trim(addslashes($_POST['description']));	
 						$skills = trim(addslashes($_POST['skills']));	
 						$date = trim(stripslashes($_POST['date']));	
 						$size = trim(addslashes($_POST['size']));	
+						$contact = trim(addslashes($_POST['contact']));
 						$group1 = trim(stripslashes($_POST['group1']));	
 						$department = trim(stripslashes($_POST['department']));	
-
+						$phone = trim(addslashes($_POST['phone']));
+						
+						if ( (isset($_SESSION['uid'])) and ($_SESSION['uid'] != NULL) ) {
+							$uid = $_SESSION['uid'];
+						} else {
+							$uid = 0;
+						} //end if		
+						
 						$tablename = "projects"; //table to insert to
-						$sql="INSERT INTO $tablename VALUES (NULL, '$title','$description','$skills','$date','$size','$group1','$department')";
+						$sql="INSERT INTO $tablename VALUES (NULL, '$title','$description','$skills','$date','$size','$contact','$group1','$department',NOW(),'$phone','$uid',NULL)";
 
 						$run = mysqli_query($con, $sql);
 
@@ -152,7 +164,31 @@
 						  
 						  <?php
 						  die();
-						  }?>
+						  }
+						#deal with file upload
+  					  	if (isset($_FILES['file'])) { //check for file upload
+							$pid = ($con->insert_id); //get id for project, this will be added to filename incase 2 users upload same file
+							if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') { //check server os
+								$file = '\\files\\';
+							} else {
+								$file = '/files/';
+ 							} //end if
+							$file = getcwd() . $file;	
+							$file .=  $pid . ($_FILES['file']['name']);
+							if (file_exists($file) )  { //check if file already there
+								unlink ($file); //if file with same name exists, delete it
+							} //end if file exists
+
+							if (move_uploaded_file($_FILES['file']['tmp_name'], $file) ) { //copy file to files folder
+								$file = addslashes($pid . ($_FILES['file']['name']) ); //prep filename for entry to db
+								$sql="UPDATE $tablename SET filename = '$file' WHERE id = '$pid'"; //set filename in DB								
+								$run = mysqli_query($con, $sql);
+							} //end if
+						} //end if			  
+
+						  
+						  
+						  ?>
 						
 						<div class="alert alert-success text-center">
 							<h4><span class="input-icon fui-check"> </span> Your project information has been receieved successfully.</h4>	
@@ -188,3 +224,4 @@
   </body>
 
 </html>
+
