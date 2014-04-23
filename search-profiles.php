@@ -15,7 +15,7 @@
 
 	$link = mysqli_connect("$host","$username","$password","$db_name") or die("Error " . mysqli_error($link));
 	
-	$query = mysqli_query($link, "SELECT * FROM $tbl_name WHERE title LIKE '%$keywords%' OR skills LIKE '%$keywords%'");
+	$query = mysqli_query($link, "SELECT * FROM $tbl_name WHERE FirstName LIKE '%$keywords%' OR LastName LIKE '%$keywords%' OR Skills LIKE '%$keywords%'");
 
 	$count = mysqli_num_rows($query);
 	
@@ -62,14 +62,14 @@
                         <div class="form-group">
                             <input type="password" name="password" id="password" placeholder="Password" class="form-control flat" />
                         </div>
-                    	
-						<input type="hidden" name="url" value="http://projectspace.t15.org/search-projects.php">
+                        
+                        <input type="hidden" name="url" value="<?php echo $url ?>">
                 </div>
                 <div class="modal-footer">
                     <a class="pull-left lightgray" href="forgot.php">Forgot password?</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="login-btn" value="submit">Login</button>
-					</form>
+                    </form>
                 </div>
             </div>
         </div>
@@ -82,13 +82,13 @@
             <li><a href="home.html">Home</a></li>
             <li><a href="projects.php">Projects</a></li>
             <li><a href="profiles.php">Profiles</a></li>
-			<li><a href="about.html">About</a></li>
-			<li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
-		<br/>
-		<p class="white uppercase" id="hidden-menu-header">Quick links</p>
-		<ul class="nav navmenu-nav">
-            <li><a href="#">Post project</a></li>
+        <br/>
+        <p class="white uppercase" id="hidden-menu-header">Quick links</p>
+        <ul class="nav navmenu-nav">
+            <li><a href="form.html">Post project</a></li>
         </ul>
     </nav>
 
@@ -118,17 +118,17 @@
 					</div>
 					
 					<!-- User account drop down. Only visible when logged in -->
-					<div id="account-button" class="hidden col-xs-4 col-sm-2">
-						<div class="dropdown pull-right">
-					    	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-					  		<span class="dropdown-arrow"></span>
-					  		<ul class="dropdown-menu">
-								<li><a href="#">Account</a></li>
-								<li><a href="my-posts.php">My posts</a></li>
-								<li><a href="logout.php">Logout</a></li>
-					  		</ul>
-						</div>
-					</div>
+					<div id="account-button" class="hidden col-xs-2">
+                        <div class="dropdown pull-right">
+                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['name']; ?><span class="caret"></span></button>
+                            <span class="dropdown-arrow"></span>
+                            <ul class="dropdown-menu">
+                                <li><a href="account.html">Account</a></li>
+                                <li><a href="my-posts.php">My posts</a></li>
+                                <li><a href="logout.php" id="logout">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
 					<!-- End of Main header menu -->
                 </div>
 
@@ -161,50 +161,32 @@
 						}
 						else{
 							while($row = mysqli_fetch_array($query)){
-								$title = stripslashes($row['title']);
-								$skills = stripslashes($row['skills']);
-								$paid = $row['paid'];
-                                $ID = $row['id'];
-								if ($paid == 1) {
-									$paid = "paid";
-								} else {
-									$paid = "unpaid";		
-								} //end if
+								$FirstName = stripslashes($row['FirstName']);
+                                $LastName = stripslashes($row['LastName']);
+								$Skills = stripslashes($row['Skills']);
+                                $ID = $row['ID'];
+					
 								
-								if($team > 1){
-									$team = $team . " people";
-								}else{
-									$team = "1 person";
-								}
-								
-								$skills = preg_replace( "/\r|\n/", "", $skills);
+								$Skills = preg_replace( "/\r|\n/", "", $Skills);
 								if (strlen($skills) > 300){
-									$skills = wordwrap($skills, 300);
-									$skills = explode("\n", $skills);
-									$skills = $skills[0] . '...';
+									$Skills = wordwrap($Skills, 300);
+									$Skills = explode("\n", $Skills);
+									$Skills = $Skills[0] . '...';
 								}
                             }
                         }					?>
 					
 					<div class="row">
                         <div class="col-xs-12  well">
-                            <h6><?php echo $title; ?></h6>
-                            <p><?php echo $skills;
+                            <h6><?php echo $FirstName; ?>
+                            <h6><?php echo $LastName; ?></h6>
+                            <p><?php echo $Skills;
 							echo "<br>"; ?>
                                 
-                            <form action="view-profile.php?id=<?php echo $ID ?>" method="post">
+                            <form action="view-profile.php?ID=<?php echo $ID ?>" method="post">
 								<input type="submit" class="btn btn-danger pull-right" name="submit" value="More.." style="margin-top: -15px;">
 									</form>
 										
-				 	
-					<?php
-					
-							}	//end while
-
-						} //end if
-
-						mysqli_close($link);
-					?>
 					
 										
 					<br>
